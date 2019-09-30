@@ -8,18 +8,18 @@ using ModelLib.Model;
 
 namespace RestItemService.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/localItems")]
     [ApiController]
     public class ItemController : ControllerBase
     {
         private static readonly List<Item> items = new List<Item>()
- {
- new Item(1,"Bread","Low",33),
- new Item(2,"Bread","Middle",21),
- new Item(3,"Beer","low",70.5),
- new Item(4,"Soda","High",21.4),
- new Item(5,"Milk","Low",55.8)
- };
+        {
+        new Item(1,"Bread","Low",33),
+        new Item(2,"Bread","Middle",21),
+        new Item(3,"Beer","low",70.5),
+        new Item(4,"Soda","High",21.4),
+        new Item(5,"Milk","Low",55.8)
+        };
 
         // GET: api/Item
         [HttpGet]
@@ -28,7 +28,8 @@ namespace RestItemService.Controllers
             return items;        }
 
         // GET: api/Item/5
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet]
+        [Route("{id}")]
         public Item Get(int id)
         {
             return items.Find(i => i.Id == id);
@@ -43,7 +44,9 @@ namespace RestItemService.Controllers
         }
 
         // PUT: api/Item/5
-        [HttpPut("{id}")]
+        [HttpPut]
+        [Route("{id}")]
+
         public void Put(int id, [FromBody] Item value)
         {
             Item item = Get(id);
@@ -57,7 +60,9 @@ namespace RestItemService.Controllers
         }
 
         // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
+        [HttpDelete]
+        [Route("{id}")]
+
         public void Delete(int id)
         {
             Item item = Get(id);
