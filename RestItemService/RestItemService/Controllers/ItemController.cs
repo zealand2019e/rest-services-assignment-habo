@@ -16,7 +16,7 @@ namespace RestItemService.Controllers
         {
         new Item(1,"Bread","Low",33),
         new Item(2,"Bread","Middle",21),
-        new Item(3,"Beer","low",70.5),
+        new Item(3,"Beer","Low",70.5),
         new Item(4,"Soda","High",21.4),
         new Item(5,"Milk","Low",55.8)
         };
@@ -33,6 +33,28 @@ namespace RestItemService.Controllers
         public Item Get(int id)
         {
             return items.Find(i => i.Id == id);
+        }
+
+        [HttpGet]
+        [Route("Name/{name}")]
+
+        public IEnumerable<Item> GetFromSubstring(string name)
+        {
+            return items.FindAll(i => i.Name.Contains(name));
+        }
+        [HttpGet]
+        [Route("Quality/{quality}")]
+
+        public IEnumerable<Item> GetbyQuality(string quality)
+        {
+            return items.FindAll(i => i.Quality == quality);
+        }
+        [HttpGet]
+        [Route("Quantity/Between/{num1}asd{num2}")]
+
+        public IEnumerable<Item> GetBetween(int num1,int num2)
+        {
+            return items.FindAll(i => (i.Quantity < num2 && i.Quantity > num1));
         }
 
         // POST: api/Item
