@@ -80,6 +80,27 @@ namespace RestItemService.Controllers
                 item.Quantity = value.Quantity;
             }
         }
+        [HttpGet]
+        [Route("filter/")]
+        public IEnumerable<Item> GetWithFilter([FromQuery] FilterItem filter)
+        {
+            if (filter.HighQuantity!=null&&filter.LowQuantity!=null)
+            {
+                return items.FindAll(i => (i.Quantity < filter.HighQuantity && i.Quantity > filter.LowQuantity));
+            }
+            if (filter.HighQuantity != null)
+            {
+                return items.FindAll(i => (i.Quantity < filter.HighQuantity));
+
+            }
+            if (filter.LowQuantity!=null)
+            {
+                return items.FindAll(i => (i.Quantity > filter.LowQuantity));
+
+            }
+            return items;
+        }
+
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete]
