@@ -11,9 +11,10 @@ namespace RestItemService.Controllers
     [Route("api/localItems")]
     [ApiController]
     public class ItemController : ControllerBase
-    {
+    {   
         private static readonly List<Item> items = new List<Item>()
         {
+            //////////////////////////////////////////////
         new Item(1,"Bread","Low",33),
         new Item(2,"Bread","Middle",21),
         new Item(3,"Beer","Low",70.5),
