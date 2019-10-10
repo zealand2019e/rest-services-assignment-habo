@@ -21,13 +21,13 @@ namespace RestItemService.Controllers
         new Item(5,"Milk","Low",55.8)
         };
 
-        // GET: api/Item
+        // GET: api/localItems
         [HttpGet]
         public IEnumerable<Item> Get()
         {
             return items;        }
 
-        // GET: api/Item/5
+        // GET: api/localItems/5
         [HttpGet]
         [Route("{id}")]
         public Item Get(int id)
@@ -57,7 +57,7 @@ namespace RestItemService.Controllers
             return items.FindAll(i => (i.Quantity < num2 && i.Quantity > num1));
         }
 
-        // POST: api/Item
+        // POST: api/localItems
         [HttpPost]
         public void Post([FromBody] Item value)
         {
@@ -65,7 +65,7 @@ namespace RestItemService.Controllers
 
         }
 
-        // PUT: api/Item/5
+        // PUT: api/localItems/5
         [HttpPut]
         [Route("{id}")]
 
@@ -84,16 +84,16 @@ namespace RestItemService.Controllers
         [Route("filter/")]
         public IEnumerable<Item> GetWithFilter([FromQuery] FilterItem filter)
         {
-            if (filter.HighQuantity!=null&&filter.LowQuantity!=null)
+            if (filter.HighQuantity!=0&&filter.LowQuantity!=0)
             {
                 return items.FindAll(i => (i.Quantity < filter.HighQuantity && i.Quantity > filter.LowQuantity));
             }
-            if (filter.HighQuantity != null)
+            if (filter.HighQuantity != 0)
             {
                 return items.FindAll(i => (i.Quantity < filter.HighQuantity));
 
             }
-            if (filter.LowQuantity!=null)
+            if (filter.LowQuantity!=0)
             {
                 return items.FindAll(i => (i.Quantity > filter.LowQuantity));
 
@@ -102,7 +102,7 @@ namespace RestItemService.Controllers
         }
 
 
-        // DELETE: api/ApiWithActions/5
+        // DELETE: api/localItems/5
         [HttpDelete]
         [Route("{id}")]
 
