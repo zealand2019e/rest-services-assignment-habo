@@ -26,7 +26,7 @@ namespace RestItemService.Controllers
         [HttpGet]
         public IEnumerable<Item> Get()
         {
-            return items;        }
+            return Dbutil.ManageItems.Get();        }
 
         // GET: api/localItems/5
         [HttpGet]
